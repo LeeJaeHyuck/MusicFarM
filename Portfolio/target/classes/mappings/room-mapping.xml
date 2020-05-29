@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="RoomDAO">
+
+	<!-- 방 얻어오기 -->
+	<select id="getRoomList" parameterType="String" resultType="room">
+		SELECT * FROM room WHERE person LIKE '%'||#{person}||'%'
+	</select>
+
+	<!-- 방 하나 얻어오기 -->
+	<select id="getRoom" resultType="room">
+		SELECT * FROM room WHERE roomNum=#{roomNum}
+	</select>
+	
+	<select id="getBookList" resultType="book">
+		SELECT * 
+  		  FROM booking
+	     WHERE roomNum = #{roomNum}
+	</select>
+	
+	<insert id="reserveRoom" parameterType="book">
+		INSERT INTO booking (bseq, id, phone, reserveDate, roomNum, person, price, name)
+		VALUES (booking_seq.nextval, #{id}, #{phone}, #{reserveDate}, #{roomNum}, #{person}, #{price}, #{name}) 
+	</insert>
+	
+	<select id="getBookListById" resultType="book">
+		SELECT *
+		  FROM booking
+		 WHERE id=#{id}
+	</select>
+</mapper>

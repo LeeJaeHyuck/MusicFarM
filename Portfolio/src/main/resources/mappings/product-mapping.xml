@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProductDAO">
+
+	<!-- 상품 얻어오기 -->
+	<select id="getProductList" resultType="product">
+		SELECT * FROM product
+		 ORDER BY pseq
+	</select>
+
+	<!-- 베스트 상품 얻어오기 -->
+	<select id="getBestProductList" resultType="product">
+		SELECT * FROM best_pro_view ORDER BY name
+	</select>
+
+	<!-- 신상품 얻어오기 -->
+	<select id="getNewProductList" resultType="product">
+		SELECT * FROM new_pro_view ORDER BY name
+	</select>
+
+	<!-- 종류별 상품 얻어오기 -->
+	<select id="getProductListByKind" resultType="product">
+		SELECT * FROM product WHERE kind = #{kind} ORDER BY name
+	</select>
+	
+	<select id="getProduct" resultType="product">
+		SELECT * FROM product WHERE pseq = #{pseq}
+	</select>
+	
+	<select id="countProductList" resultType="int">
+		SELECT COUNT(*) FROM product WHERE name LIKE '%'||#{name}||'%' AND kind LIKE '%'||#{kind}||'%'
+	</select>
+	
+	<select id="pagingProduct" resultType="product">
+	SELECT * 
+	  FROM (SELECT ROWNUM rn, A.* 
+			  FROM (SELECT * 
+					  FROM product 
+					 WHERE name LIKE '%'||#{name}||'%'
+  					   AND kind LIKE '%'||#{kind}||'%'
+				 	 ORDER BY pseq DESC) A)
+	  WHERE rn BETWEEN #{start} AND #{end}
+	</select>
+
+</mapper>

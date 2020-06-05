@@ -41,4 +41,19 @@ public class ContactServiceImpl implements ContactService {
 		return dao.getContactListById(id);
 	}
 
+	@Override
+	public void updateContact(ContactVO contact) {
+		dao.updateContact(contact);
+	}
+
+	@Override
+	public void deleteContact(int cseq) {
+		dao.deleteContact(cseq);
+	}
+
+	@Override
+	public void updateReply(ContactVO contact) {
+		dao.updateReply(contact);
+	}
+
 }

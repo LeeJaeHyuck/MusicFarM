@@ -15,3 +15,12 @@ function change(cnt, price) {
 	x.totalPrice.value = y * price;
 }
 
+function deleteProduct() {
+	if (confirm("정말 삭제하시겠습니까?") == true) {
+		document.form.action="delete_product";
+		document.form.submit();
+		return true;
+	} else {
+		return false;
+	}
+}

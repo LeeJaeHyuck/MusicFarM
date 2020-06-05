@@ -11,7 +11,9 @@ postNum VARCHAR2(7),
 addr1 VARCHAR2(100),
 addr2 VARCHAR2(100),
 phone VARCHAR2(20),
-regdate DATE DEFAULT SYSDATE
+useyn VARCHAR2(1) DEFAULT 'y',
+regdate DATE DEFAULT SYSDATE,
+authority NUMBER(1) DEFAULT '1'
 );
 
 -- 상품 테이블
@@ -43,7 +45,8 @@ name VARCHAR2(40),
 phone VARCHAR2(20),
 email VARCHAR2(40)
 );
-
+delete from admin;
+commit;
 -- 주소 테이블
 ALTER TABLE address DROP PRIMARY KEY CASCADE;
 DROP TABLE address;
@@ -134,8 +137,10 @@ reserveDate date,
 roomNum NUMBER(5) REFERENCES room (roomNum),
 person number(3),
 price number(8),
+result CHAR(1) DEFAULT 1,
 regDate date default sysdate
 );
+DROP SEQUENCE booking_seq;
 CREATE SEQUENCE booking_seq START WITH 1;
 
 -- 댓글 테이블
@@ -199,59 +204,49 @@ select o.oseq, d.odseq, d.pseq, d.quantity, p.name pname, m.id, m.name mname,
 
 
 insert into member(id, pwd, name) values('test', 'test123', '홍길동');
+update member set authority = 2;
  -- 1 피아노, 2 기타, 3 베이스, 4 드럼, 5 미디, 6 악세사리
-insert into product(pseq, name, kind, price1, price2, price3, content, bestyn) values(product_seq.nextval, '피아노', 1, 10000, 30000, 20000, '좋아용', 'y');
-insert into product(pseq, name, kind, price1, price2, price3, content, bestyn) values(product_seq.nextval, '기타', 2, 10000, 30000, 20000, '좋아용', 'y');
-insert into product(pseq, name, kind, price1, price2, price3, content, bestyn) values(product_seq.nextval, '드럼', 4, 10000, 30000, 20000, '좋아용', 'y');
-insert into product(pseq, name, kind, price1, price2, price3, content, bestyn) values(product_seq.nextval, '베이스', 3, 10000, 30000, 20000, '좋아용', 'y');
-insert into product(pseq, name, kind, price1, price2, price3, content, bestyn, useyn) values(product_seq.nextval, '마스터키보드', 1, 10000, 30000, 20000, '좋아용', 'n', 'n');
-insert into product(pseq, name, kind, price1, price2, price3, content, bestyn, useyn) values(product_seq.nextval, '신디사이저', 1, 10000, 30000, 20000, '좋아용', 'n', 'n');
-insert into product(pseq, name, kind, price1, price2, price3, content, bestyn, useyn) values(product_seq.nextval, '통기타', 2, 10000, 30000, 20000, '좋아용', 'n', 'n');
-insert into product(pseq, name, kind, price1, price2, price3, content, bestyn, useyn) values(product_seq.nextval, '드럼패드', 5, 10000, 30000, 20000, '좋아용', 'n', 'n');
-insert into product(pseq, name, kind, price1, price2, price3, content, bestyn, useyn) values(product_seq.nextval, '스피커', 5, 10000, 30000, 20000, '좋아용', 'n', 'n');
-insert into product(pseq, name, kind, price1, price2, price3, content, bestyn, useyn) values(product_seq.nextval, '인터페이스', 5, 10000, 30000, 20000, '좋아용', 'n', 'n');
-insert into product(pseq, name, kind, price1, price2, price3, content, bestyn, useyn) values(product_seq.nextval, '다이나믹 마이크', 5, 10000, 30000, 20000, '좋아용', 'n', 'n');
-insert into product(pseq, name, kind, price1, price2, price3, content, bestyn, useyn) values(product_seq.nextval, '콘덴서 마이크', 5, 10000, 30000, 20000, '좋아용', 'n', 'n');
-insert into product(pseq, name, kind, price1, price2, price3, content, bestyn, useyn) values(product_seq.nextval, '이펙터', 6, 10000, 30000, 20000, '좋아용', 'n', 'n');
-insert into product(pseq, name, kind, price1, price2, price3, content, bestyn, useyn) values(product_seq.nextval, '기타줄', 6, 10000, 30000, 20000, '좋아용', 'n', 'n');
-insert into room(roomNum, person, price) values(101, 4, 30000);
-insert into room(roomNum, person, price) values(102, 5, 50000);
-insert into room(roomNum, person, price) values(103, 6, 70000);
-insert into room(roomNum, person, price) values(104, 6, 100000);
-insert into room(roomNum, person, price) values(201, 4, 30000);
-insert into room(roomNum, person, price) values(202, 6, 70000);
-insert into room(roomNum, person, price) values(203, 5, 50000);
-insert into room(roomNum, person, price) values(204, 6, 100000);
+insert into product(pseq, name, kind, price1, price2, price3, content, bestyn, image) values(product_seq.nextval, '피아노', 1, 10000, 30000, 20000, '좋아용', 'y', 'piano.jpg');
+insert into product(pseq, name, kind, price1, price2, price3, content, bestyn, image) values(product_seq.nextval, '기타', 2, 10000, 30000, 20000, '좋아용', 'y', 'elecGuitar.jpg');
+insert into product(pseq, name, kind, price1, price2, price3, content, bestyn, image) values(product_seq.nextval, '드럼', 4, 10000, 30000, 20000, '좋아용', 'y', 'drum.jpg');
+insert into product(pseq, name, kind, price1, price2, price3, content, bestyn, image) values(product_seq.nextval, '베이스', 3, 10000, 30000, 20000, '좋아용', 'y', 'bass.jpg');
+insert into product(pseq, name, kind, price1, price2, price3, content, bestyn, image) values(product_seq.nextval, '마스터키보드', 1, 10000, 30000, 20000, '좋아용', 'n', 'masterKey.jpg');
+insert into product(pseq, name, kind, price1, price2, price3, content, bestyn, image) values(product_seq.nextval, '신디사이저', 1, 10000, 30000, 20000, '좋아용', 'n', 'synth.jpg');
+insert into product(pseq, name, kind, price1, price2, price3, content, bestyn, image) values(product_seq.nextval, '통기타', 2, 10000, 30000, 20000, '좋아용', 'n', 'guitar.jpg');
+insert into product(pseq, name, kind, price1, price2, price3, content, bestyn, image) values(product_seq.nextval, '드럼패드', 5, 10000, 30000, 20000, '좋아용', 'n', 'drumPad.jpg');
+insert into product(pseq, name, kind, price1, price2, price3, content, bestyn, image) values(product_seq.nextval, '스피커', 5, 10000, 30000, 20000, '좋아용', 'n', 'speaker.jpg');
+insert into product(pseq, name, kind, price1, price2, price3, content, bestyn, image) values(product_seq.nextval, '인터페이스', 5, 10000, 30000, 20000, '좋아용', 'n', 'interface.jpg');
+insert into product(pseq, name, kind, price1, price2, price3, content, bestyn, image) values(product_seq.nextval, '다이나믹 마이크', 5, 10000, 30000, 20000, '좋아용', 'n', 'dynamic.jpg');
+insert into product(pseq, name, kind, price1, price2, price3, content, bestyn, image) values(product_seq.nextval, '콘덴서 마이크', 5, 10000, 30000, 20000, '좋아용', 'n', 'conmic.jpg');
+insert into product(pseq, name, kind, price1, price2, price3, content, bestyn, image) values(product_seq.nextval, '이펙터', 6, 10000, 30000, 20000, '좋아용', 'n', 'effector.jpg');
+insert into product(pseq, name, kind, price1, price2, price3, content, bestyn, image) values(product_seq.nextval, '기타줄', 6, 10000, 30000, 20000, '좋아용', 'n', 'guitarLine.jpg');
+insert into room(roomNum, person, price, image) values(101, 4, 30000, '4.jpg');
+insert into room(roomNum, person, price, image) values(102, 5, 50000, '5.jpg');
+insert into room(roomNum, person, price, image) values(103, 6, 70000, '6.jpg');
+insert into room(roomNum, person, price, image) values(104, 6, 100000, '62.jpg');
+insert into room(roomNum, person, price, image) values(201, 4, 30000, '4.jpg');
+insert into room(roomNum, person, price, image) values(202, 6, 70000, '6.jpg');
+insert into room(roomNum, person, price, image) values(203, 5, 50000, '5.jpg');
+insert into room(roomNum, person, price, image) values(204, 6, 100000, '62.jpg');
 insert into booking(bseq, roomNum, reserveDate) values(1000, 101, '20200501');
 insert into booking(bseq, roomNum, reserveDate) values(2000, 101, '20200509');
 insert into booking(bseq, roomNum, reserveDate) values(3000, 101, '20200606');
 insert into booking(bseq, roomNum, reserveDate) values(4000, 101, '20200612');
 insert into booking(bseq, roomNum, reserveDate) values(5000, 101, '20210612');
 
-update product set content='슈퍼스트렛의 로즈우드 지판 버젼!! 극강의 퀄리티!!' where pseq = 2;
+update product set useyn='n' where name = '피아노';
 update contact set rep=2, reply='슈가보단 샤크라' where cseq=1;
-select * from comments;
 select * from member;
-delete from contact;
-delete from member where id='test';
+select * from order_detail where oseq=11;
+SELECT * FROM member ORDER BY regdate DESC;
+delete from room;
+delete from orders where oseq=11;
 SELECT * FROM room WHERE person LIKE '%'||''||'%';
 drop table order_;
+update member set pwd='1111' where id='asdf';
 commit;
-
+SELECT COUNT(*) FROM member WHERE id LIKE '%'||''||'%' AND name LIKE '%'||''||'%';
 INSERT INTO contact(cseq, title, content, id)
 		VALUES (contact_seq.nextval, 'asd', 'asdf', 'test');
-
-select b.* 
-  from booking b, room r
- where b.roomNum = r.roomNum
-   AND b.reserve = 'y';
-   
-   SELECT * 
-  		  FROM booking
-	     WHERE roomNum = 101
-  		   AND reserve = 'y';
-           SELECT *
-		FROM contact
-		ORDER BY cseq DESC;
 
 @zip

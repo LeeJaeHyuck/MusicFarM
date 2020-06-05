@@ -57,7 +57,7 @@ div {
 <div align="center">
 <h3>아이디 찾기</h3>
   <form class="form_inline" action="find_id" method="post" name="find">
-    아이디: <input class="form-control" type="text" name="name"><br>
+    이름: <input class="form-control" type="text" name="name"><br>
     이메일: <input class="form-control" type="text" name="email"><br>
     <input class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="return check()" value="찾기"></input>
     <br>

@@ -20,7 +20,11 @@ public interface ProductService {
 	
 	int countProductList(ProductVO vo);
 	
+	int adminCountProductList(ProductVO vo);
+	
 	List<ProductVO> pagingProduct(PagingVO paging);
+	
+	List<ProductVO> adminPagingProduct(PagingVO paging);
 	
 	List<CommentsVO> getProductCommentList(int pseq);
 	
@@ -29,4 +33,10 @@ public interface ProductService {
 	void updateComment(CommentsVO comment);
 	
 	void deleteComment(int coseq);
+	
+	void insertProduct(ProductVO product);
+	
+	void updateProduct(ProductVO product);
+	
+	void deleteProduct(int pseq);
 }

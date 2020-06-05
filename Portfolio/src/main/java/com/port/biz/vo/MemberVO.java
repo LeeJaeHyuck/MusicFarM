@@ -12,7 +12,9 @@ public class MemberVO {
 	private String addr1;
 	private String addr2;
 	private String phone;
+	private String useyn;
 	private Date regdate;
+	private int authority;
 
 	public String getId() {
 		return id;
@@ -86,6 +88,14 @@ public class MemberVO {
 		this.phone = phone;
 	}
 
+	public String getUseyn() {
+		return useyn;
+	}
+
+	public void setUseyn(String useyn) {
+		this.useyn = useyn;
+	}
+
 	public Date getRegdate() {
 		return regdate;
 	}
@@ -94,11 +104,19 @@ public class MemberVO {
 		this.regdate = regdate;
 	}
 
+	public int getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(int authority) {
+		this.authority = authority;
+	}
+
 	@Override
 	public String toString() {
 		return "MemberVO [id=" + id + ", pwd=" + pwd + ", name=" + name + ", email=" + email + ", regidentNum="
 				+ regidentNum + ", postNum=" + postNum + ", addr1=" + addr1 + ", addr2=" + addr2 + ", phone=" + phone
-				+ ", regdate=" + regdate + "]";
+				+ ", useyn=" + useyn + ", regdate=" + regdate + ", authority=" + authority + "]";
 	}
 
 }

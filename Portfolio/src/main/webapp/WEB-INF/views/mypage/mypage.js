@@ -39,15 +39,16 @@ function change_address() {
 }
 
 function member_update() {
-	if (document.sign.pwd.value == "") {
-		alert("비밀번호를 입력해주세요.");
-		document.sign.pwd.focus();
-		return false;
-	} else if (document.sign.pwdCheck.value == "") {
-		alert("비밀번호체크를 입력해주세요.");
-		document.sign.pwdCheck.focus();
-		return false;
-	} else if (document.sign.pwd.value != document.sign.pwdCheck.value) {
+//	if (document.sign.pwd.value == "") {
+//		alert("비밀번호를 입력해주세요.");
+//		document.sign.pwd.focus();
+//		return false;
+//	} else if (document.sign.pwdCheck.value == "") {
+//		alert("비밀번호체크를 입력해주세요.");
+//		document.sign.pwdCheck.focus();
+//		return false;
+//	} else 
+	if (document.sign.pwd.value != document.sign.pwdCheck.value) {
 		alert("비밀번호가 다릅니다.");
 		document.sign.pwdCheck.focus();
 		return false;
@@ -77,5 +78,12 @@ function member_update() {
 		alert("전화번호를 입력해주세요.");
 		document.sign.phone.focus();
 		return false;
+	} else {
+		if(prompt("비밀번호를 입력해주세요.") == document.sign.pass.value){
+			alert("수정되었습니다.");
+		} else {
+			alert("비밀번호가 틀립니다.");
+			return false;
+		}
 	}
 }

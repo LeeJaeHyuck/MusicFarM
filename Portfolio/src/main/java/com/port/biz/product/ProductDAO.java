@@ -39,9 +39,17 @@ public class ProductDAO {
 	public List<ProductVO> pagingProduct(PagingVO paging){
 		return mybatis.selectList("ProductDAO.pagingProduct", paging);
 	}
+	
+	public List<ProductVO> adminPagingProduct(PagingVO paging){
+		return mybatis.selectList("ProductDAO.adminPagingProduct", paging);
+	}
 
 	public int countProductList(ProductVO vo) {
 		return mybatis.selectOne("ProductDAO.countProductList", vo);
+	}
+	
+	public int adminCountProductList(ProductVO vo) {
+		return mybatis.selectOne("ProductDAO.adminCountProductList", vo);
 	}
 	
 	public List<CommentsVO> getProductComentList(int pseq){
@@ -59,5 +67,22 @@ public class ProductDAO {
 	public void deleteComment(int coseq) {
 		mybatis.delete("CommentDAO.deleteComment", coseq);
 	}
+	
+	public void insertProduct(ProductVO product) {
+		mybatis.insert("ProductDAO.insertProduct", product);
+	}
+	
+	public void updateProduct(ProductVO product) {
+		mybatis.update("ProductDAO.updateProduct", product);
+	}
+	
+	public void deleteProduct(int pseq) {
+		mybatis.update("ProductDAO.deleteProduct", pseq);
+	}
+	
+	public void deleteCommentByPseq(int pseq) {
+		mybatis.delete("CommentDAO.deleteCommentByPseq", pseq);
+	}
+	
 	
 }

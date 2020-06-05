@@ -26,4 +26,6 @@ public interface OrderService {
 	List<Integer> allOrder(String id);
 
 	void insertOrderAll(OrdersVO orders);
+	
+	void orderDelete(int odseq);
 }

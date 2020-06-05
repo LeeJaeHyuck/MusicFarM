@@ -25,5 +25,6 @@
 		<mapper resource="mappings/order-mapping.xml" />
 		<mapper resource="mappings/contact-mapping.xml" />
 		<mapper resource="mappings/comment-mapping.xml" />
+		<mapper resource="mappings/admin-mapping.xml" />
 	</mappers>
 </configuration>

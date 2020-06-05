@@ -1,13 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
 <title>SIGN UP</title>
-<script type="text/javascript"></script>
-</head>
-<body>
+<script type="text/javascript">
+function onlyNumber(event){
+    event = event || window.event;
+    var length1 = document.sign.regNum1.value.length;
+    var length2 = document.sign.regNum2.value.length;
+    var keyID = (event.which) ? event.which : event.keyCode;
+    if ( (keyID >= 48 && keyID <= 57) || (keyID >= 96 && keyID <= 105) || keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 || keyID == 9){
+    	return true;
+	}else{
+        return false;
+	}
+}
+
+function removeChar(event) {
+    event = event || window.event;
+    var keyID = (event.which) ? event.which : event.keyCode;
+    if ( keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39) 
+        return;
+    else
+        event.target.value = event.target.value.replace(/[^0-9]/g, "");
+}
+</script>
 <%@ include file="../header.jsp" %>
 <div id="sign">
 <h1>회원가입</h1>
@@ -15,9 +31,9 @@
 
     <div class="form-group">
       <label for="inputEmail4">아이디</label><br>
-      <table>
+      <table style="width:100%">
       <tr>
-      <th style="width:75%">
+      <th style="width:80%">
       <input type="text" class="form-input" id="inputEmail4" name="id">
       <input type="hidden" name="reid">
       </th>
@@ -45,8 +61,8 @@
     
     <div class="form-group">
       <label for="inputPassword4">주민번호</label><br>
-      <input type="text" class="form-control" id="regNum" name="regNum1"> - 
-      <input type="password" class="form-control" id="regNum" name="regNum2">
+      <input type="text" class="form-control" id="regNum" name="regNum1" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)'> - 
+      <input type="password" class="form-control" id="regNum" name="regNum2" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)'>
     </div>  
     
   <div class="form-group">
@@ -81,10 +97,8 @@
     </div>  
   
   <div align="center">
-  <button type="submit" class="btn btn-primary" onclick="return go_save()">회원가입</button>
+  <button type="submit" class="btn btn-primary" onclick="return join_member()">회원가입</button>
   <button type="reset" class="btn btn-primary">취소</button>
   </div>
 </form></div>
 <%@ include file="../footer.jsp" %>
-</body>
-</html>

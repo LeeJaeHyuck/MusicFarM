@@ -13,7 +13,7 @@
         <div>
     <br><br>
             <div>
-                <span><h3>상품평</h3></span>
+                <h3><span>상품평</span></h3>
             </div>
             <hr>
            <div class="input-group mb-3">
@@ -29,6 +29,7 @@
 <div>
     <form id="commentListForm" name="commentListForm" method="post">
         <input type="hidden" id="userId" name="userid" value="${loginUser.id}">
+        <input type="hidden" name="authority" value="${loginUser.authority }">
         <div id="commentList">
         </div>
     </form>
@@ -74,7 +75,11 @@ $(function(){
 
 // 상품평 등록
 function save_comment(pseq){
-	
+	if(document.commentListForm.userid.value == ""){
+		alert("로그인을 해주세요.");
+	} else if(document.commentForm.content.value == ""){
+		alert("내용을 입력해주세요.");
+	} else {
 	$.ajax({
 		type: 'POST',
 		url: 'save_product_comment',
@@ -84,7 +89,7 @@ function save_comment(pseq){
 				getCommentList(); // 상품평 목록 요청함수 호출
 				$("#content").val("");
 			} else {
-				alert("뭘봐");
+				
 			}
 		},
 			
@@ -92,6 +97,7 @@ function save_comment(pseq){
 			alert("error:" + error);
 		}
 	});
+	}
 }
 
 // 상품평 목록 불러오기
@@ -108,6 +114,15 @@ function getCommentList(){
 			console.log(data.length);
 			if(cCnt > 0){
 				for (i=0; i<data.length; i++){
+					
+					if(document.commentListForm.authority.value == 2){
+						html += "<table id=\"cotable\"><tr>";
+						html += "<th>" + data[i].writer + "</th>";
+						html += "<td style=\"text-align:right\">" + displayTime(data[i].regDate) +"</td></tr>";
+						html += "<tr><td>" + data[i].content + "</td>"
+						html += "<td style=\"text-align:right\"><a href=\"delete_product_comment?coseq=" + data[i].coseq + "&pseq="+ data[i].pseq +"\">삭제</a></td></tr></table>";
+						html += "<hr>";
+					} else {
 					if(document.commentListForm.userid.value == data[i].writer){
 						html += "<table id=\"cotable\"><tr>";
 						html += "<th>" + data[i].writer + "</th>";
@@ -124,10 +139,11 @@ function getCommentList(){
 						html += "<hr>";
 					}
 				}
+				}
 			} else {
 				html += "<div>";
 				html += "<div><h6>등록된 상품평이 없습니다.</h6></div>";
-				html == "</div>"
+				html == "</div>";
 			}
 			
 			$("#cCnt").html(cCnt);  // 상품평의 갯수 출력

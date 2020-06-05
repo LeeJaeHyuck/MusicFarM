@@ -46,4 +46,20 @@ public class OrderDAO {
 		return mybatis.selectList("OrderDAO.allOrder", id);
 	}
 	
+	public List<OrdersVO> orderCheckByOseq(int oseq) {
+		return mybatis.selectList("OrderDAO.orderCheckByOseq", oseq);
+	}
+	
+	public OrdersVO orderCheckByOdseq(int odseq) {
+		return mybatis.selectOne("OrderDAO.orderCheckByOdseq", odseq);
+	}
+	
+	public void orderDelete(int oseq) {
+		mybatis.delete("OrderDAO.orderDelete", oseq);
+	}
+	
+	public void orderDetailDelete(int odseq) {
+		mybatis.delete("OrderDAO.orderDetailDelete", odseq);
+	}
+	
 }

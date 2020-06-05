@@ -29,7 +29,7 @@ public class CommentController {
 		MemberVO user = (MemberVO) session.getAttribute("loginUser");
 
 		if (user == null) {
-			return ("fail");
+			return "fail";
 		} else {
 			String userId = user.getId();
 			comment.setWriter(userId);
@@ -52,7 +52,7 @@ public class CommentController {
 		MemberVO user = (MemberVO) session.getAttribute("loginUser");
 
 		if (user == null) {
-			return ("fail");
+			return "fail";
 		} else {
 			String userId = user.getId();
 			comment.setWriter(userId);

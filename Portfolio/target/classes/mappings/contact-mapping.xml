@@ -34,4 +34,18 @@
 		FROM contact
 	</select>
 	
+	<update id="updateContact">
+		UPDATE contact
+		SET title=#{title}, content=#{content}
+		WHERE cseq=#{cseq}
+	</update>
+	
+	<delete id="deleteContact">
+		DELETE FROM contact WHERE cseq=#{cseq}
+	</delete>
+	
+	<update id="updateReply">
+		UPDATE contact SET reply=#{reply}, rep=2 WHERE cseq=#{cseq}
+	</update>
+	
 </mapper>

@@ -31,11 +31,17 @@
 				<tr>
 					<td>수량선택</td>
 					<td><input type="button" value="-" onclick="change(-1, '${product.price2}')">
-					<input type="text" name="quantity" value="1" size="1">
+					<input type="text" name="quantity" value="1" size="1" style="text-align: center;">
 					<input type="button" value="+" onclick="change(1, '${product.price2}')"></td>
 				</tr>
 			</table>
 			<hr>
+			<c:choose>
+			<c:when test="${loginUser.authority == 2 }">
+			<button type="button" class="btn btn-outline-secondary" style="width:49%;" onclick="location='update_product_form?pseq=${product.pseq}'">수정</button>
+			<button type="button" class="btn btn-outline-secondary" style="width:49%;" onclick="return deleteProduct()">삭제</button>
+			</c:when>
+			<c:otherwise>
 			<table class="bordernone">
 				<tr>
 				<th>수량</th>
@@ -53,6 +59,8 @@
 				<td colspan="2"><input type="submit" class="btn btn-primary" style="width:100%" value="구매하기"></td>
 				</tr>
 			</table>
+			</c:otherwise>
+			</c:choose>
 		</div>
 </div>
 </form>

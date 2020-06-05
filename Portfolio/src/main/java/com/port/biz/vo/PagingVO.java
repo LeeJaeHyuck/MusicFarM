@@ -7,7 +7,25 @@ public class PagingVO {
 	private int cntPage = 5;
 	private String name;
 	private String kind;
-	
+	private String person;
+	private String id;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getPerson() {
+		return person;
+	}
+
+	public void setPerson(String person) {
+		this.person = person;
+	}
+
 	public String getKind() {
 		return kind;
 	}
@@ -38,7 +56,13 @@ public class PagingVO {
 
 	// 제일 마지막 페이지 계산
 	public void calcLastPage(int total, int cntPerPage) {
-		setLastPage((int) Math.ceil((double) total / (double) cntPerPage));
+		int lp = (int) Math.ceil((double) total / (double) cntPerPage);
+
+		if (lp == 0) {
+			setLastPage(1);
+		} else {
+			setLastPage(lp);
+		}
 	}
 
 	// 시작, 끝 페이지 계산
@@ -135,7 +159,8 @@ public class PagingVO {
 	public String toString() {
 		return "PagingVO [nowPage=" + nowPage + ", startPage=" + startPage + ", endPage=" + endPage + ", total=" + total
 				+ ", cntPerPage=" + cntPerPage + ", lastPage=" + lastPage + ", start=" + start + ", end=" + end
-				+ ", cntPage=" + cntPage + "]";
+				+ ", cntPage=" + cntPage + ", name=" + name + ", kind=" + kind + ", person=" + person + ", id=" + id
+				+ "]";
 	}
 
 }

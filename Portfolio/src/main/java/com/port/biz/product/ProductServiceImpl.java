@@ -70,4 +70,29 @@ public class ProductServiceImpl implements ProductService {
 		dao.deleteComment(coseq);
 	}
 
+	@Override
+	public void insertProduct(ProductVO product) {
+		dao.insertProduct(product);
+	}
+
+	@Override
+	public void updateProduct(ProductVO product) {
+		dao.updateProduct(product);
+	}
+
+	@Override
+	public void deleteProduct(int pseq) {
+		dao.deleteProduct(pseq);
+	}
+
+	@Override
+	public List<ProductVO> adminPagingProduct(PagingVO paging) {
+		return dao.adminPagingProduct(paging);
+	}
+
+	@Override
+	public int adminCountProductList(ProductVO vo) {
+		return dao.adminCountProductList(vo);
+	}
+
 }

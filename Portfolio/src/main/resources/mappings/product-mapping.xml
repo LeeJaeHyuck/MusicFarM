@@ -17,7 +17,7 @@
 
 	<!-- 신상품 얻어오기 -->
 	<select id="getNewProductList" resultType="product">
-		SELECT * FROM new_pro_view ORDER BY name
+		SELECT * FROM new_pro_view ORDER BY pseq DESC
 	</select>
 
 	<!-- 종류별 상품 얻어오기 -->
@@ -30,7 +30,7 @@
 	</select>
 	
 	<select id="countProductList" resultType="int">
-		SELECT COUNT(*) FROM product WHERE name LIKE '%'||#{name}||'%' AND kind LIKE '%'||#{kind}||'%'
+		SELECT COUNT(*) FROM product WHERE name LIKE '%'||#{name}||'%' AND kind LIKE '%'||#{kind}||'%' AND useyn='y'
 	</select>
 	
 	<select id="pagingProduct" resultType="product">
@@ -40,8 +40,38 @@
 					  FROM product 
 					 WHERE name LIKE '%'||#{name}||'%'
   					   AND kind LIKE '%'||#{kind}||'%'
+  					   AND useyn='y'
 				 	 ORDER BY pseq DESC) A)
 	  WHERE rn BETWEEN #{start} AND #{end}
 	</select>
-
+	
+	<select id="adminCountProductList" resultType="int">
+		SELECT COUNT(*) FROM product WHERE name LIKE '%'||#{name}||'%' AND kind LIKE '%'||#{kind}||'%'
+	</select>
+	
+	<select id="adminPagingProduct" resultType="product">
+	SELECT * 
+	  FROM (SELECT ROWNUM rn, A.* 
+			  FROM (SELECT * 
+					  FROM product 
+					 WHERE name LIKE '%'||#{name}||'%'
+  					   AND kind LIKE '%'||#{kind}||'%'
+				 	 ORDER BY pseq DESC) A)
+	  WHERE rn BETWEEN #{start} AND #{end}
+	</select>
+	
+	<insert id="insertProduct">
+		INSERT INTO product(pseq, name, kind, price1, price2, price3, content, image)
+		VALUES (product_seq.nextval, #{name}, #{kind}, #{price1}, #{price2}, #{price3}, #{content}, #{image})	
+	</insert>
+	
+	<update id="updateProduct">
+		UPDATE product
+		SET name=#{name}, kind=#{kind}, price1=#{price1}, price2=#{price2}, price3=#{price3}, content=#{content}, image=#{image}, bestyn=#{bestyn}, useyn=#{useyn}
+		WHERE pseq=#{pseq}
+	</update>
+	
+	<update id="deleteProduct">
+		UPDATE product SET useyn='n' WHERE pseq=#{pseq}
+	</update>
 </mapper>

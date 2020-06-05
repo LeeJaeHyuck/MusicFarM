@@ -14,6 +14,17 @@ public class BookVO {
 	private int price;
 	private Date regDate;
 	private String name;
+	private String result;
+	
+	
+
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
 
 	public int getBseq() {
 		return bseq;
@@ -99,7 +110,7 @@ public class BookVO {
 	public String toString() {
 		return "BookVO [bseq=" + bseq + ", id=" + id + ", phone=" + phone + ", date=" + date + ", reserveDate="
 				+ reserveDate + ", roomNum=" + roomNum + ", person=" + person + ", price=" + price + ", regDate="
-				+ regDate + ", name=" + name + "]";
+				+ regDate + ", name=" + name + ", result=" + result + "]";
 	}
 
 }

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ include file="../header.jsp" %>
+
 <h1>주문내역</h1>
 
 <form name="order" method="post" action="all_pay_form">
@@ -16,6 +17,9 @@
     </tr>
   </thead>
   <tbody>
+  <c:if test="${orderList == null}">
+  	<tr><td colspan="4" style="color:red;"><h4>주문내역이 없습니다.</h4></td></tr>
+  </c:if>
   
     <c:forEach var="order" items="${orderList}">
     	<tr>

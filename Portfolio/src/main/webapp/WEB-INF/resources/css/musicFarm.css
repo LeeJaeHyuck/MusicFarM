@@ -53,11 +53,11 @@ div#front {
 }
 
 #mainProduct {
-	border: solid 1px #FFFFFF;
+	border: solid 1px #ffffff;
 	border-radius: 10px;
 	width: 97%;
 	min-height: 280px;
-	background: white;
+	background: #ffffff;
 	padding: 10px;
 	text-align: center;
 }

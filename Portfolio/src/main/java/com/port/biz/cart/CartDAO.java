@@ -38,4 +38,8 @@ public class CartDAO {
 		return mybatis.selectOne("CartDAO.selectCart", vo);
 	}
 	
+	public void qtyupdate(CartVO vo) {
+		mybatis.update("CartDAO.qtyupdate", vo);
+	}
+	
 }

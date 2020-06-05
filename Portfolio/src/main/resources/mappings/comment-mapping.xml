@@ -44,4 +44,14 @@
 		DELETE FROM comments
 		WHERE coseq = #{coseq}
 	</delete>
+	
+	<delete id="deleteCommentByPseq">
+		DELETE FROM comments
+		WHERE pseq=#{pseq}
+	</delete>
+	
+	<delete id="deleteCommentByRoomNum">
+		DELETE FROM comments
+		WHERE roomNum = #{roomNum}
+	</delete>
 </mapper>

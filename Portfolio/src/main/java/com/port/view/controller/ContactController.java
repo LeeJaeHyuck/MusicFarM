@@ -22,7 +22,7 @@ public class ContactController {
 
 	@RequestMapping(value = "contact_list")
 	public String contactForm(HttpSession session, Model model) {
-		
+
 		List<ContactVO> contactList = contactService.getContactList();
 		model.addAttribute("contactList", contactList);
 		return "contact/contactList";
@@ -47,27 +47,51 @@ public class ContactController {
 		if (user == null) {
 			return "member/loginForm";
 		} else {
-			System.out.println(contact);
 			contactService.insertContact(contact);
 			return "redirect:index";
 		}
 	}
-	
+
 	@RequestMapping(value = "contact_detail")
-	public String contactDetail(HttpSession session, Model model, @RequestParam(value="cseq") int cseq) {
+	public String contactDetail(HttpSession session, Model model, @RequestParam(value = "cseq") int cseq) {
 		MemberVO user = (MemberVO) session.getAttribute("loginUser");
 
 		if (user == null) {
 			return "member/loginForm";
 		} else {
 			ContactVO contact = contactService.getContact(cseq);
-			if(contact.getId().equals(user.getId())) {
+			if (user.getAuthority() == 2) {
 				model.addAttribute("contact", contact);
 				return "contact/contactDetail";
 			} else {
-				return "contact/contact_fail";
+				if (contact.getId().equals(user.getId())) {
+					model.addAttribute("contact", contact);
+					return "contact/contactDetail";
+				} else {
+					return "contact/contact_fail";
+				}
 			}
 		}
 	}
+
+	@RequestMapping(value = "contact_update_form")
+	public String contactUpdateForm(ContactVO contact, Model model) {
+		model.addAttribute("contact", contact);
+		return "contact/contactUpdate";
+	}
+
+	@RequestMapping(value = "contact_update")
+	public String contactUpdate(ContactVO contact) {
+		contactService.updateContact(contact);
+		return "redirect:contact_detail?cseq=" + contact.getCseq();
+	}
+
+	@RequestMapping(value = "delete_contact")
+	public String contactDelete(ContactVO contact) {
+		System.out.println(contact);
+		contactService.deleteContact(contact.getCseq());
+		return "redirect:contact_list";
+	}
 	
+
 }

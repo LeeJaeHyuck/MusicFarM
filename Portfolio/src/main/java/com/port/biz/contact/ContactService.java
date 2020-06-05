@@ -15,4 +15,10 @@ public interface ContactService {
 	ContactVO getContact(int cseq);
 	
 	int selectMaxCseq();
+	
+	void updateContact(ContactVO contact);
+	
+	void deleteContact(int cseq);
+	
+	void updateReply(ContactVO contact);
 }

@@ -124,4 +124,16 @@ public class OrderServiceImpl implements OrderService {
 		return dao.allOrder(id);
 	}
 
+	@Override
+	public void orderDelete(int odseq) {
+		OrdersVO orderDetail = dao.orderCheckByOdseq(odseq);
+		int oseq = orderDetail.getOseq();
+		dao.orderDetailDelete(odseq);
+		
+		List<OrdersVO> order = dao.orderCheckByOseq(oseq);
+		if(order == null) {
+			dao.orderDelete(oseq);
+		}
+	}
+
 }

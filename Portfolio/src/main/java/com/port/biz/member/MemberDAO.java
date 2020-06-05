@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.port.biz.vo.AddressVO;
 import com.port.biz.vo.MemberVO;
+import com.port.biz.vo.PagingVO;
 
 @Repository
 public class MemberDAO {
@@ -17,6 +18,14 @@ public class MemberDAO {
 	
 	public MemberVO login(String id){
 		return mybatis.selectOne("MemberDAO.login", id);
+	}
+	
+	public MemberVO getMember(String id){
+		return mybatis.selectOne("MemberDAO.getMember", id);
+	}
+	
+	public List<MemberVO> getMemberList(){
+		return mybatis.selectList("MemberDAO.getMemberList");
 	}
 	
 	public void signUp(MemberVO member) {
@@ -37,5 +46,21 @@ public class MemberDAO {
 	
 	public MemberVO findPwd(MemberVO member) {
 		return mybatis.selectOne("MemberDAO.findPwd", member);
+	}
+	
+	public List<MemberVO> pagingMember(PagingVO paging){
+		return mybatis.selectList("MemberDAO.pagingMember", paging);
+	}
+
+	public int countMemberList(MemberVO vo) {
+		return mybatis.selectOne("MemberDAO.countMemberList", vo);
+	}
+	
+	public void deleteMember(String id) {
+		mybatis.update("MemberDAO.deleteMember", id);
+	}
+	
+	public void changeMember(MemberVO member) {
+		mybatis.update("MemberDAO.changeMember", member);
 	}
 }

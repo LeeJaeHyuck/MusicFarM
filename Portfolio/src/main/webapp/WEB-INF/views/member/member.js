@@ -30,7 +30,7 @@ function idCheck() {
 					"toolbar=no, menubar=no, scrollbar=yes, resizable=no, width=500, height=200");
 }
 
-function go_save() {
+function join_member() {
 	if (document.sign.id.value == "") {
 		alert("아이디를 입력하세요.");
 		document.sign.id.focus();
@@ -77,6 +77,9 @@ function go_save() {
 		alert("전화번호를 입력해주세요.");
 		document.sign.phone.focus();
 		return false;
+	} else {
+		alert("회원가입이 완료되었습니다.");
+		return true;
 	}
 }
 

@@ -33,4 +33,16 @@ public class ContactDAO {
 	public int selectMaxCseq() {
 		return mybatis.selectOne("ContactDAO.selectMaxCseq");
 	}
+	
+	public void updateContact(ContactVO contact) {
+		mybatis.update("ContactDAO.updateContact", contact);
+	}
+	
+	public void deleteContact(int cseq) {
+		mybatis.delete("ContactDAO.deleteContact", cseq);
+	}
+	
+	public void updateReply(ContactVO contact) {
+		mybatis.update("ContactDAO.updateReply", contact);
+	}
 }

@@ -9,12 +9,21 @@ window
 		.open(url, "_blank_1",
 				"toolbar=no, menubar=no, scrollbar=yes, resizable=no, width=800, height=800");
 }
+function deleteRoom() {
+	if (confirm("정말 삭제하시겠습니까?") == true) {
+		document.form.action="delete_room";
+		document.form.submit();
+		return true;
+	} else {
+		return false;
+	}
+}
 </script>
 <form name="form" action="reserve_room_form">
 <input type="hidden" name="roomNum" value="${room.roomNum}">
 <input type="hidden" name="date">
 <div class="media">
-  <img src="product_images/${room.image}" class="align-self-center mr-3" width="50%" height="400px;" alt="image" />
+  <img src="room_images/${room.image}" class="align-self-center mr-3" width="50%" height="400px;" alt="image" />
   <div class="media-body">
     <h3>${room.roomNum}호</h3>
 			<table class="bordernone">
@@ -32,6 +41,12 @@ window
 				</tr>
 			</table>
 			<hr>
+			<c:choose>
+			<c:when test="${loginUser.authority == 2 }">
+			<button type="button" class="btn btn-outline-secondary" style="width:49%;" onclick="location='update_room_form?roomNum=${room.roomNum}'">수정</button>
+			<button type="button" class="btn btn-outline-secondary" style="width:49%;" onclick="return deleteRoom()">삭제</button>
+			</c:when>
+			<c:otherwise>
 			<table class="bordernone">
 				<tr>
 				<th>수량</th>
@@ -46,6 +61,8 @@ window
 					<td><input type="submit" class="btn btn-primary" style="width:100%" value="예약하기"></td>
 				</tr>
 			</table>
+			</c:otherwise>
+			</c:choose>
 		</div>
 </div>
 

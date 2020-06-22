@@ -120,7 +120,7 @@ div#front {
 	text-align: center;
 }
 
-#sign {
+.sign {
 	width: 500px;
 	margin: auto;
 }
@@ -166,6 +166,7 @@ h1 {
 }
 
 #menudrop ul.myMenu {
+	position: relative; z-index: 1;
 }
 
 #menudrop ul.myMenu>li {
@@ -214,3 +215,52 @@ h1 {
 }
 
 #cotable{width:100%;}
+
+
+#contable{text-align: center;}
+#contitle{color: black;}
+#contitle:hover{color: blue;}
+#redlabel{color: red;}
+#bluelabel{color: blue;}
+
+#paydiv{
+	width: 70%;
+	margin: auto;
+}
+
+#paytable{
+	width: 100%;
+}
+
+#paytable th{
+	background-color: skyblue;
+	border: 1px solid #eeeeee;
+	text-align: center;
+}
+
+.form-control1 {
+  display: inline-block;
+  width: 50%;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+#pwrite th{
+	border: 1px solid #eeeeee;
+	background-color: skyblue;
+	width: 10%;
+	text-align: center;
+}
+
+#pwrite td {
+	border: 1px solid #eeeeee;
+}

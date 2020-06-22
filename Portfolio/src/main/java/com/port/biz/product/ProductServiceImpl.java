@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.port.biz.vo.CommentsVO;
 import com.port.biz.vo.PagingVO;
 import com.port.biz.vo.ProductVO;
+import com.port.biz.vo.SalesQuantity;
 
 @Service("productService")
 public class ProductServiceImpl implements ProductService {
@@ -93,6 +94,11 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public int adminCountProductList(ProductVO vo) {
 		return dao.adminCountProductList(vo);
+	}
+
+	@Override
+	public List<SalesQuantity> getProductSales() {
+		return dao.getProductSales();
 	}
 
 }

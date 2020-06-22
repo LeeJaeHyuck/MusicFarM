@@ -5,6 +5,7 @@ import java.util.List;
 import com.port.biz.vo.CommentsVO;
 import com.port.biz.vo.PagingVO;
 import com.port.biz.vo.ProductVO;
+import com.port.biz.vo.SalesQuantity;
 
 public interface ProductService {
 	
@@ -39,4 +40,6 @@ public interface ProductService {
 	void updateProduct(ProductVO product);
 	
 	void deleteProduct(int pseq);
+	
+	List<SalesQuantity> getProductSales();
 }

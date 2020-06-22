@@ -10,12 +10,15 @@
 <script type="text/javascript" src="member/member.js"></script>
 <script type="text/javascript" src="product/product.js"></script>
 <script type="text/javascript" src="mypage/mypage.js"></script>
+<script type="text/javascript" src="room/room.js"></script>
+<script type="text/javascript" src="contact/contact.js"></script>
 <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
 	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
 	crossorigin="anonymous">
 <link href="css/musicFarm.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap" rel="stylesheet">
 </head>
 <title>MusicFarM</title>
 <div id="wrap">
@@ -23,7 +26,7 @@
 		<!-- Image and text -->
 		<nav class="navbar navbar-light">
 			<a class="navbar-brand" href="index"> <img
-				src="main_images/icon.png" width="50" height="50"
+				src="main_images/logo.png" width="50" height="50"
 				class="d-inline-block align-top" alt="" loading="lazy">
 			</a> <a class="navbar-brand" href="index">MusicFarM</a>
 		</nav>
@@ -120,6 +123,8 @@
 								href="admin_order_list">주문리스트</a></li>
 							<li><a class="nav-item nav-link" id="nav-link"
 								href="admin_reserve_list">예약리스트</a></li>
+							<li><a class="nav-item nav-link" id="nav-link"
+								href="sales_graph_form">판매그래프</a></li>
 						</ul>
 					</c:when>
 

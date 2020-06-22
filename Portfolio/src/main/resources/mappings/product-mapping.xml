@@ -74,4 +74,16 @@
 	<update id="deleteProduct">
 		UPDATE product SET useyn='n' WHERE pseq=#{pseq}
 	</update>
+	
+	<resultMap id="salesMap" type="com.port.biz.vo.SalesQuantity">
+		<result column="pname" property="pname" />
+		<result column="sales_count" property="quantity" />
+	</resultMap>
+	
+	<select id="getProductSales" resultMap="salesMap">
+		SELECT pname, sum(quantity) as sales_count
+		  FROM order_view
+		 WHERE result='2'
+		 GROUP BY pname
+	</select>
 </mapper>

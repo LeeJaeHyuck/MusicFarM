@@ -106,3 +106,39 @@ function find_pwd() {
 	window.open(url, "_blank_1",
 					"toolbar=no, menubar=no, scrollbar=yes, resizable=no, width=500, height=400");
 }
+
+function change_info(){
+	if(confirm("수정하시겠습니까?") == true) return true;
+	else return false;
+}
+
+function go_next() {
+	if (document.formm.okon1[0].checked == true) {
+		document.formm.action = "sign_up_form";
+		document.formm.submit();
+	} else if (document.formm.okon1[1].checked == true) {
+		alert("약관의 동의를 해야합니다.");
+	}
+}
+
+
+function onlyNumber(event){
+    event = event || window.event;
+    var length1 = document.sign.regNum1.value.length;
+    var length2 = document.sign.regNum2.value.length;
+    var keyID = (event.which) ? event.which : event.keyCode;
+    if ( (keyID >= 48 && keyID <= 57) || (keyID >= 96 && keyID <= 105) || keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 || keyID == 9){
+    	return true;
+	}else{
+        return false;
+	}
+}
+
+function removeChar(event) {
+    event = event || window.event;
+    var keyID = (event.which) ? event.which : event.keyCode;
+    if ( keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39) 
+        return;
+    else
+        event.target.value = event.target.value.replace(/[^0-9]/g, "");
+}

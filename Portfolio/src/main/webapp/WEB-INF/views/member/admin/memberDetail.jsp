@@ -5,16 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>회원 정보</title>
-<script type="text/javascript">
-function change_info(){
-	if(confirm("수정하시겠습니까?") == true) return true;
-	else return false;
-}
-</script>
 </head>
 <body>
 <%@ include file="../../header.jsp" %>
-<div id="sign">
+<div class="sign">
 <h1>회원정보</h1>
 <form action="admin_update_member" method="post" name="mdetail">
 	<input type="hidden" name="pwd" value="${member.pwd}">

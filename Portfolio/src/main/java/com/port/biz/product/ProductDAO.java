@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.port.biz.vo.CommentsVO;
 import com.port.biz.vo.PagingVO;
 import com.port.biz.vo.ProductVO;
+import com.port.biz.vo.SalesQuantity;
 
 @Repository
 public class ProductDAO {
@@ -82,6 +83,10 @@ public class ProductDAO {
 	
 	public void deleteCommentByPseq(int pseq) {
 		mybatis.delete("CommentDAO.deleteCommentByPseq", pseq);
+	}
+	
+	public List<SalesQuantity> getProductSales() {
+		return mybatis.selectList("ProductDAO.getProductSales");
 	}
 	
 	

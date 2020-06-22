@@ -2,15 +2,6 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ include file="../header.jsp" %>
-<script>
-function opendate(){
-var url = "calendar?roomNum=" + document.form.roomNum.value;
-
-window
-		.open(url, "_blank_1",
-				"toolbar=no, menubar=no, scrollbar=yes, resizable=no, width=750, height=730");
-}
-</script>
 <h1>예약하기</h1>
 <form name="form" method="post" action="reserve_room">
 <input type="hidden" name="date" value="${book.date}">
@@ -46,16 +37,31 @@ window
 
 <h3>예약자 정보</h3>
 
-예약자ID : ${user.id}<br>
-예약자명 : ${user.name}<br>
-전화번호 : ${user.phone}<br>
-결제 방식 :
-<label><input type="radio" name="pay" value="1">신용카드</label> 
-<label><input type="radio" name="pay" value="2">계좌이체</label>
-<label><input type="radio" name="pay" value="3">휴대폰  </label>
+<table class="table" style="text-align:center">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">예약자ID</th>
+      <th scope="col">예약자명</th>
+      <th scope="col">전화번호</th>
+      <th scope="col">결제방식</th>
+    </tr>
+  </thead>
+  <tbody>
+    	<tr>
+    	<td>${user.id}</td>
+    	<td>${user.name}</td>
+    	<td>${user.phone}</td>
+    	<td>
+    	<label><input type="radio" name="pay" value="1">신용카드</label> 
+		<label><input type="radio" name="pay" value="2">계좌이체</label>
+		<label><input type="radio" name="pay" value="3">휴대폰  </label>
+		</td>
+    	</tr>
+  </tbody>
+</table>
 <div align="right">
 <button type="button" class="btn btn-outline-secondary" onclick="location='index'">취소</button>
-<button type="submit" class="btn btn-primary">예약</button>
+<button type="submit" class="btn btn-primary" onclick="return reserveCheck()">예약</button>
 </div>
 </form>
 <%@ include file="../footer.jsp" %>

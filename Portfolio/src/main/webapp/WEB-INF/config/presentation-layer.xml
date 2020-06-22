@@ -21,6 +21,8 @@
 	
 	<mvc:resources location="/WEB-INF/resources/main_images/" mapping="/main_images/**"></mvc:resources>
 	<mvc:resources location="/WEB-INF/views/member/" mapping="/member/**"></mvc:resources>
+	<mvc:resources location="/WEB-INF/views/room/" mapping="/room/**"></mvc:resources>
+	<mvc:resources location="/WEB-INF/views/contact/" mapping="/contact/**"></mvc:resources>
 	<mvc:resources location="/WEB-INF/resources/css/" mapping="/css/**"></mvc:resources>
 	<mvc:resources location="/WEB-INF/resources/js/" mapping="/js/**"></mvc:resources>
 	<mvc:resources location="/WEB-INF/resources/product_images/" mapping="/product_images/**"></mvc:resources>

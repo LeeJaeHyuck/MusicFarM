@@ -1,4 +1,4 @@
-
+-- 멤버 테이블
 ALTER TABLE member DROP PRIMARY KEY CASCADE;
 DROP TABLE member;
 CREATE TABLE member(
@@ -35,18 +35,6 @@ regdate DATE DEFAULT SYSDATE
 DROP SEQUENCE product_seq;
 CREATE SEQUENCE product_seq START WITH 1;
 
--- 관리자 테이블
-ALTER TABLE admin DROP PRIMARY KEY CASCADE;
-DROP TABLE admin;
-CREATE TABLE admin(
-id VARCHAR2(20) PRIMARY KEY,
-pwd VARCHAR2(20),
-name VARCHAR2(40),
-phone VARCHAR2(20),
-email VARCHAR2(40)
-);
-delete from admin;
-commit;
 -- 주소 테이블
 ALTER TABLE address DROP PRIMARY KEY CASCADE;
 DROP TABLE address;
@@ -83,8 +71,6 @@ oseq NUMBER(10) PRIMARY KEY,
 id VARCHAR2(20) REFERENCES member (id),
 regdate DATE DEFAULT sysdate
 );
-DROP SEQUENCE orders_seq;
-CREATE SEQUENCE orders_seq START WITH 1;
 
 -- 주문 상세 테이블
 ALTER TABLE order_detail DROP PRIMARY KEY CASCADE;
@@ -102,12 +88,12 @@ result CHAR(1) DEFAULT 1
 DROP SEQUENCE order_detail_seq;
 CREATE SEQUENCE order_detail_seq START WITH 1;
 
--- 게시판 테이블
+-- 문의 테이블
 ALTER TABLE contact DROP PRIMARY KEY CASCADE;
 DROP TABLE contact;
 CREATE TABLE contact(
 cseq NUMBER(5) PRIMARY KEY,
-title VARCHAR2(30),
+title VARCHAR2(500),
 content VARCHAR2(1000),
 id VARCHAR2(20) REFERENCES member (id), -- 작성자
 reply VARCHAR2(1000),                   -- 답변 내용
@@ -118,15 +104,17 @@ DROP SEQUENCE contact_seq;
 CREATE SEQUENCE contact_seq START WITH 1;
 
 -- 작업실 테이블
+ALTER TABLE room DROP PRIMARY KEY CASCADE;
 DROP TABLE room;
 CREATE TABLE room(
-    roomNum NUMBER(5) PRIMARY KEY,
-    person NUMBER(1),
-    price NUMBER(8),
-    image VARCHAR2(50) DEFAULT 'default.jpg'
+roomNum NUMBER(5) PRIMARY KEY,
+person NUMBER(1),
+price NUMBER(8),
+image VARCHAR2(50) DEFAULT 'default.jpg'
 );
 
 -- 예약 테이블
+ALTER TABLE booking DROP PRIMARY KEY CASCADE;
 drop table booking;
 create table booking(
 bseq number(5) PRIMARY KEY,
@@ -140,10 +128,9 @@ price number(8),
 result CHAR(1) DEFAULT 1,
 regDate date default sysdate
 );
-DROP SEQUENCE booking_seq;
-CREATE SEQUENCE booking_seq START WITH 1;
 
 -- 댓글 테이블
+ALTER TABLE comments DROP PRIMARY KEY CASCADE;
 DROP TABLE comments;
 CREATE TABLE comments(
     coseq NUMBER(8) PRIMARY KEY,
@@ -156,9 +143,6 @@ CREATE TABLE comments(
 );
 DROP SEQUENCE comments_seq;
 CREATE SEQUENCE comments_seq START WITH 1;
-select * FROM comments;
-commit;
-
 
 -- 베스트 상품 보기 뷰
 create or replace view best_pro_view
@@ -170,8 +154,6 @@ select pseq, name, price2, image
          order by regdate desc)
  where rownum <= 4;
  
- 
- 
  -- 신규 상품 보기 뷰
 create or replace view new_pro_view
     as
@@ -181,7 +163,6 @@ select pseq, name, price2, image
          where useyn = 'y'
          order by regdate desc)
  where rownum <= 4;
-
 
 -- 장바구니 보기 뷰
 create or replace view cart_view
@@ -202,10 +183,11 @@ select o.oseq, d.odseq, d.pseq, d.quantity, p.name pname, m.id, m.name mname,
    and o.oseq = d.oseq 
    and o.id = m.id;
 
-
-insert into member(id, pwd, name) values('test', 'test123', '홍길동');
-update member set authority = 2;
- -- 1 피아노, 2 기타, 3 베이스, 4 드럼, 5 미디, 6 악세사리
+commit;
+-- 기본 데이터
+insert into member(id, pwd, name, email, regidentNum, postNum, addr1, addr2, phone, authority) values('admin', '1234', '홍길동', 'test@email.com', '800612-1065484', '164-722', '서울 서초구 반포1동 서초한양아파트', '106동 1105호', '010-4864-4654', '2'); -- 관리자
+insert into member(id, pwd, name, email, regidentNum, postNum, addr1, addr2, phone, authority) values('test', '1234', '이순신', 'asdf@email.com', '960830-2468145', '151-882', '서울 관악구 신림3동 646', '301호', '010-8651-2641', '1'); -- 사용자
+-- 상품
 insert into product(pseq, name, kind, price1, price2, price3, content, bestyn, image) values(product_seq.nextval, '피아노', 1, 10000, 30000, 20000, '좋아용', 'y', 'piano.jpg');
 insert into product(pseq, name, kind, price1, price2, price3, content, bestyn, image) values(product_seq.nextval, '기타', 2, 10000, 30000, 20000, '좋아용', 'y', 'elecGuitar.jpg');
 insert into product(pseq, name, kind, price1, price2, price3, content, bestyn, image) values(product_seq.nextval, '드럼', 4, 10000, 30000, 20000, '좋아용', 'y', 'drum.jpg');
@@ -220,6 +202,7 @@ insert into product(pseq, name, kind, price1, price2, price3, content, bestyn, i
 insert into product(pseq, name, kind, price1, price2, price3, content, bestyn, image) values(product_seq.nextval, '콘덴서 마이크', 5, 10000, 30000, 20000, '좋아용', 'n', 'conmic.jpg');
 insert into product(pseq, name, kind, price1, price2, price3, content, bestyn, image) values(product_seq.nextval, '이펙터', 6, 10000, 30000, 20000, '좋아용', 'n', 'effector.jpg');
 insert into product(pseq, name, kind, price1, price2, price3, content, bestyn, image) values(product_seq.nextval, '기타줄', 6, 10000, 30000, 20000, '좋아용', 'n', 'guitarLine.jpg');
+-- 스튜디오
 insert into room(roomNum, person, price, image) values(101, 4, 30000, '4.jpg');
 insert into room(roomNum, person, price, image) values(102, 5, 50000, '5.jpg');
 insert into room(roomNum, person, price, image) values(103, 6, 70000, '6.jpg');
@@ -228,25 +211,5 @@ insert into room(roomNum, person, price, image) values(201, 4, 30000, '4.jpg');
 insert into room(roomNum, person, price, image) values(202, 6, 70000, '6.jpg');
 insert into room(roomNum, person, price, image) values(203, 5, 50000, '5.jpg');
 insert into room(roomNum, person, price, image) values(204, 6, 100000, '62.jpg');
-insert into booking(bseq, roomNum, reserveDate) values(1000, 101, '20200501');
-insert into booking(bseq, roomNum, reserveDate) values(2000, 101, '20200509');
-insert into booking(bseq, roomNum, reserveDate) values(3000, 101, '20200606');
-insert into booking(bseq, roomNum, reserveDate) values(4000, 101, '20200612');
-insert into booking(bseq, roomNum, reserveDate) values(5000, 101, '20210612');
-
-update product set useyn='n' where name = '피아노';
-update contact set rep=2, reply='슈가보단 샤크라' where cseq=1;
-select * from member;
-select * from order_detail where oseq=11;
-SELECT * FROM member ORDER BY regdate DESC;
-delete from room;
-delete from orders where oseq=11;
-SELECT * FROM room WHERE person LIKE '%'||''||'%';
-drop table order_;
-update member set pwd='1111' where id='asdf';
-commit;
-SELECT COUNT(*) FROM member WHERE id LIKE '%'||''||'%' AND name LIKE '%'||''||'%';
-INSERT INTO contact(cseq, title, content, id)
-		VALUES (contact_seq.nextval, 'asd', 'asdf', 'test');
-
+-- 주소
 @zip

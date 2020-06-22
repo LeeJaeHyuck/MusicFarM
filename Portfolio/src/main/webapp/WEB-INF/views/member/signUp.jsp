@@ -3,29 +3,9 @@
 <!DOCTYPE html>
 <title>SIGN UP</title>
 <script type="text/javascript">
-function onlyNumber(event){
-    event = event || window.event;
-    var length1 = document.sign.regNum1.value.length;
-    var length2 = document.sign.regNum2.value.length;
-    var keyID = (event.which) ? event.which : event.keyCode;
-    if ( (keyID >= 48 && keyID <= 57) || (keyID >= 96 && keyID <= 105) || keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 || keyID == 9){
-    	return true;
-	}else{
-        return false;
-	}
-}
-
-function removeChar(event) {
-    event = event || window.event;
-    var keyID = (event.which) ? event.which : event.keyCode;
-    if ( keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39) 
-        return;
-    else
-        event.target.value = event.target.value.replace(/[^0-9]/g, "");
-}
 </script>
 <%@ include file="../header.jsp" %>
-<div id="sign">
+<div class="sign">
 <h1>회원가입</h1>
 <form action="sign_up" method="post" name="sign">
 
@@ -67,7 +47,7 @@ function removeChar(event) {
     
   <div class="form-group">
       <label for="inputEmail4">이메일</label>
-      <input type="email" class="form-control" id="inputEmail4" name="email">
+      <input type="email" class="form-control" id="inputEmail4" name="email" placeholder="aaaa@email.com">
     </div>
    
   <div class="form-group">
@@ -93,7 +73,7 @@ function removeChar(event) {
   
   <div class="form-group">
       <label for="inputPassword4">전화번호</label>
-      <input type="text" class="form-control" id="inputPassword4" name="phone">
+      <input type="text" class="form-control" id="inputPassword4" name="phone" placeholder="000-0000-0000">
     </div>  
   
   <div align="center">

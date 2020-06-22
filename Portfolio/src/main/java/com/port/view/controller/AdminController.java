@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.port.biz.contact.ContactService;
@@ -24,6 +25,7 @@ import com.port.biz.vo.OrdersVO;
 import com.port.biz.vo.PagingVO;
 import com.port.biz.vo.ProductVO;
 import com.port.biz.vo.RoomVO;
+import com.port.biz.vo.SalesQuantity;
 
 @Controller
 public class AdminController {
@@ -98,7 +100,7 @@ public class AdminController {
 			model.addAttribute("search", search);
 			model.addAttribute("paging", paging);
 			model.addAttribute("memberList", memberService.pagingMember(paging));
-			return "member/admin/memberList";
+			return "mypage/admin/memberList";
 		}
 	}
 
@@ -237,6 +239,28 @@ public class AdminController {
 		productService.deleteProduct(pseq);
 		return "redirect:product_list";
 	}
+	
+	@RequestMapping(value="sales_graph_form")
+	public String adminProductSalesChart() {
+		return "mypage/admin/salesGraph";
+	}
+	
+	@RequestMapping(value="sales_graph", produces="application/json; charset=utf-8")
+	@ResponseBody
+	public List<SalesQuantity> sales_record_chart(){
+		
+		List<SalesQuantity> listSales = productService.getProductSales();
+		
+		System.out.println("판매 실적>>>>>>");
+		System.out.println("    제품명     수량");
+		System.out.println("---------------");
+		for(SalesQuantity item : listSales) {
+			System.out.printf("%10s%3d\n", item.getPname(), item.getQuantity());
+		}
+		
+		System.out.println("================");
+		return listSales;
+	}
 
 	// ========================주문====================
 	@RequestMapping(value = "admin_order_list")
@@ -286,7 +310,7 @@ public class AdminController {
 	// =========================작업실======================================
 	@RequestMapping(value = "insert_room_form")
 	public String insertRoomForm() {
-		return "room/roomWriteForm";
+		return "room/admin/roomWriteForm";
 	}
 
 	@RequestMapping(value = "insert_room")
@@ -317,7 +341,7 @@ public class AdminController {
 	@RequestMapping(value = "update_room_form")
 	public String updateRoomForm(Model model, @RequestParam(value = "roomNum") String roomNum) {
 		model.addAttribute("room", roomService.getRoom(roomNum));
-		return "room/updateRoom";
+		return "room/admin/updateRoom";
 	}
 
 	@RequestMapping(value = "update_room")

@@ -17,8 +17,8 @@
     </tr>
   </thead>
   <tbody>
-  <c:if test="${orderList == null}">
-  	<tr><td colspan="4" style="color:red;"><h4>주문내역이 없습니다.</h4></td></tr>
+  <c:if test="${empty orderList}">
+  	<tr><td colspan="5" style="color:red;"><h4>주문내역이 없습니다.</h4></td></tr>
   </c:if>
   
     <c:forEach var="order" items="${orderList}">

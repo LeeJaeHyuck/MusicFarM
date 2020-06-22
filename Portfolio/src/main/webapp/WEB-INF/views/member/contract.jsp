@@ -1,16 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>  
     
-<script>
-function go_next() {
-	if (document.formm.okon1[0].checked == true) {
-		document.formm.action = "sign_up_form";
-		document.formm.submit();
-	} else if (document.formm.okon1[1].checked == true) {
-		alert("약관의 동의를 해야합니다.");
-	}
-}
-</script>
 <%@ include file="../header.jsp" %>	 
 <div align="center">
   <article>

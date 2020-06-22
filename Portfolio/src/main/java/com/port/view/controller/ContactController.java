@@ -48,7 +48,7 @@ public class ContactController {
 			return "member/loginForm";
 		} else {
 			contactService.insertContact(contact);
-			return "redirect:index";
+			return "redirect:contact_list";
 		}
 	}
 
@@ -76,6 +76,7 @@ public class ContactController {
 
 	@RequestMapping(value = "contact_update_form")
 	public String contactUpdateForm(ContactVO contact, Model model) {
+		contact = contactService.getContact(contact.getCseq());
 		model.addAttribute("contact", contact);
 		return "contact/contactUpdate";
 	}
@@ -88,7 +89,6 @@ public class ContactController {
 
 	@RequestMapping(value = "delete_contact")
 	public String contactDelete(ContactVO contact) {
-		System.out.println(contact);
 		contactService.deleteContact(contact.getCseq());
 		return "redirect:contact_list";
 	}

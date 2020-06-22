@@ -14,7 +14,7 @@
     </tr>
   </thead>
   <tbody>
-  <c:if test="${cartList == null}">
+  <c:if test="${empty cartList}">
   	<tr><td colspan="4" style="color:red;"><h4>장바구니가 비었습니다.</h4></td></tr>
   </c:if>
     <c:forEach var="cart" items="${cartList}">

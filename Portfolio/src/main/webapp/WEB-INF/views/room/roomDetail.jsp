@@ -2,22 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
 <script>
-function opendate(){
-var url = "calendar?roomNum=" + document.form.roomNum.value;
-
-window
-		.open(url, "_blank_1",
-				"toolbar=no, menubar=no, scrollbar=yes, resizable=no, width=800, height=800");
-}
-function deleteRoom() {
-	if (confirm("정말 삭제하시겠습니까?") == true) {
-		document.form.action="delete_room";
-		document.form.submit();
-		return true;
-	} else {
-		return false;
-	}
-}
 </script>
 <form name="form" action="reserve_room_form">
 <input type="hidden" name="roomNum" value="${room.roomNum}">
@@ -38,6 +22,14 @@ function deleteRoom() {
 				<tr>
 					<td>예약가능 날짜</td>
 					<td><input type="button" value="달력" onclick="opendate()"></td>
+				</tr>
+				<tr>
+					<td>이용가능 시간</td>
+					<td>10:00 ~ 23:00</td>
+				</tr>
+				<tr>
+					<td>주소</td>
+					<td>서울특별시 관악구 신림동 159-753번지 지하1층</td>
 				</tr>
 			</table>
 			<hr>

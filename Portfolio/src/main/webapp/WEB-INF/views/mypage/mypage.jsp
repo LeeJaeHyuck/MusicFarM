@@ -6,35 +6,11 @@
 <meta charset="UTF-8">
 <title>SIGN UP</title>
 <script type="text/javascript">
-function deleteMember(){
-	if(confirm("탈퇴하시겠습니까?") == true){
-		document.sign.action = "delete_member";
-		document.sign.submit();
-	} else {
-		return false;
-	}
-}
-
-function deleteCheck(){
-	  var pwd = prompt("비밀번호를 입력해주세요.");
-	  
-	  if(pwd == document.sign.pass.value){
-		  if(confirm("정말 탈퇴 하시겠습니까?") == true){
-			  alert("탈퇴되었습니다.");
-			  document.sign.action="delete_member";
-			  document.sign.submit();
-		  } else {
-			  alert("취소되었습니다.");
-		  }
-	  }else{
-		  alert("비밀번호가 다릅니다.");
-	  }
-	}
 </script>
 </head>
 <body>
 <%@ include file="../header.jsp" %>
-<div id="sign">
+<div class="sign">
 <h1>회원정보</h1>
 <form action="update_member" method="post" name="sign">
 	<input type="hidden" name="pass" value="${user.pwd}">
@@ -97,7 +73,7 @@ function deleteCheck(){
   
   <div align="center">
   <button type="submit" class="btn btn-primary" onclick="return member_update()">수정</button>
-  <button type="reset" class="btn btn-primary">취소</button>
+  <button type="reset" class="btn btn-primary" onclick="javascript:history.go(-1)">취소</button>
   <button type="button" class="btn btn-danger" style="float:right" onclick="return deleteCheck()">탈퇴</button>
   </div>
 </form></div>

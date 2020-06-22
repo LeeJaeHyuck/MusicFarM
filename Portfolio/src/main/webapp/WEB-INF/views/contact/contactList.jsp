@@ -6,10 +6,6 @@ th, td{
 	text-align: center;
 }
 
-#contitle{color: black;}
-#contitle:hover{color: blue;}
-#redlabel{color: red;}
-#bluelabel{color: blue;}
 </style>
 <h1>Contact</h1>
 <div align="right">
@@ -29,13 +25,13 @@ th, td{
     <c:forEach items="${contactList}" var="cont">
     	<tr>
     		<td style="text-align:center">${cont.cseq}</td>
-    		<td><a href="contact_detail?cseq=${cont.cseq}" id="contitle">${cont.title}</a></td>
+    		<td><a href="contact_detail?cseq=${cont.cseq}">${cont.title}</a></td>
     		<td>${cont.id}</td>
     		<td><fmt:formatDate value="${cont.regdate}" pattern="yyyy-MM-dd" /></td>
     		<td>
     			<c:choose>
     				<c:when test="${cont.rep == 1}"><label id="redlabel">미답변</label></c:when>
-    				<c:otherwise><label id="blurlabel">답변완료</label></c:otherwise>
+    				<c:otherwise><label id="bluelabel">답변완료</label></c:otherwise>
     			</c:choose>
     		</td>
     	</tr>

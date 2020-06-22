@@ -1,21 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp"%>
-<style>
-th, td{
-	text-align: center;
-}
-
-#contitle{color: black;}
-#contitle:hover{color: blue;}
-#redlabel{color: red;}
-#bluelabel{color: blue;}
-</style>
 <h1>문의내역</h1>
 <div align="right">
 	<button type="button" class="btn btn-outline-primary" onclick="location='contact_write'">글쓰기</button>
 </div>
-<table class="table">
+<table class="table" id="contable">
   <thead>
     <tr>
       <th scope="col" width="15%">글번호</th>

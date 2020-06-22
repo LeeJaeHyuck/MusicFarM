@@ -3,97 +3,6 @@
 <!DOCTYPE html>
 <%@ include file="../../header.jsp" %>
 <script type="text/javascript">
-	function admin_order_save() {
-		var count = 0;
-		if (document.order.result.length == undefined) {
-			if (document.order.result.checked == true) {
-				count++;
-			}
-		} else {
-			for (var i = 0; i < document.order.result.length; i++) {
-				if (document.order.result[i].checked == true) {
-					count++;
-				}
-			}
-		}
-		if (count == 0) {
-			alert("주문처리할 항목을 선택해 주세요.");
-		} else {
-			if(confirm("주문처리 하시겠습니까?") == true){
-			document.order.action = "admin_order_save";
-			document.order.submit();
-			return true;
-			} else {
-				return false;
-			}
-		}
-	}
-	
-	function admin_order_del() {
-		var count = 0;
-		if (document.order.result.length == undefined) {
-			if (document.order.result.checked == true) {
-				count++;
-			}
-		} else {
-			for (var i = 0; i < document.order.result.length; i++) {
-				if (document.order.result[i].checked == true) {
-					count++;
-				}
-			}
-		}
-		if (count == 0) {
-			alert("주문취소할 항목을 선택해 주세요.");
-		} else {
-			if(confirm("주문취소 처리 하시겠습니까?") == true){
-			document.order.action = "admin_order_del";
-			document.order.submit();
-			return true;
-			} else {
-				return false;
-			}
-		}
-	}
-	
-	function check_all() {
-		var all = document.order.checkAll;
-		var result = document.order.result;
-		if (all.checked) {
-			if (result.length == null) {
-				result.checked = true;
-			} else {
-				for (var i = 0; i < result.length; i++) {
-					result[i].checked = true;
-				}
-			}
-		} else {
-			if (result.length == null) {
-				result.checked = false;
-			} else {
-				for (var i = 0; i < result.length; i++) {
-					result[i].checked = false;
-				}
-			}
-		}
-		
-		
-	}
-	
-	function result_check(){
-		var all = document.order.checkAll;
-		var result = document.order.result;
-		if(result.length == null){
-			if(result.checked == false){
-				all.checked = false;
-			}
-		} else {
-			for (var i = 0; i < result.length; i++) {
-				if(result[i].checked == false){
-					all.checked = false;
-				}
-			}
-		}
-	}
 </script>
 <form name="order" method="post" action="admin_order_list">
 <div>
@@ -117,8 +26,8 @@
     </tr>
   </thead>
   <tbody style="font-size:0.8em;">
-  <c:if test="${orderList == null}">
-  	<tr><td colspan="4" style="color:red;"><h4>주문내역이 없습니다.</h4></td></tr>
+  <c:if test="${empty orderList}">
+  	<tr><td colspan="8" style="color:red;"><h4>주문내역이 없습니다.</h4></td></tr>
   </c:if>
   
     <c:forEach var="order" items="${orderList}">

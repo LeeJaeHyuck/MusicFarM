@@ -29,7 +29,7 @@
     </c:forEach>      
   </div>
    <div class="clear"></div>
-  
+
    <h2><a href="room_list" style="color:black;"> Studio</a></h2> 
       <div id="mainRoomProduct">         
         <c:forEach items="${roomList}"  var="room" begin="0" end="3" step="1">

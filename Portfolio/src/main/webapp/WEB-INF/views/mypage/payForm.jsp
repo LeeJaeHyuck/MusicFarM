@@ -35,13 +35,13 @@
 <h3>주문자 정보</h3>
 <table id="paytable">
 <tr>
-<td>주문자명 :</td><td>${user.name}</td></tr>
-<tr><td>전화번호 :</td><td>${user.phone}</td></tr>
-<tr><td>우편번호 : </td><td><input type="text" value="${user.postNum}" name="postNum" readonly></td></tr>
-<tr><td>주소 : </td><td><input type="text" value="${user.addr1}" name="addr1" size="30" readonly>
+<th>주문자명</th><td>${user.name}</td></tr>
+<tr><th>전화번호</th><td>${user.phone}</td></tr>
+<tr><th>우편번호</th><td><input type="text" value="${user.postNum}" name="postNum" readonly>
 <input type="button" value="배송지 변경" onclick="change_address()"></td></tr>
-<tr><td>상세 주소 : <td><input type="text" value="${user.addr2}" name="addr2"></td></tr>
-<tr><td>결제 방식 : </td>
+<tr><th>주소</th><td><input type="text" value="${user.addr1}" name="addr1" size="35" readonly></td></tr>
+<tr><th>상세 주소</th><td><input type="text" value="${user.addr2}" name="addr2"></td></tr>
+<tr><th>결제 방식</th>
 <td>
 <label><input type="radio" name="pay" value="1">신용카드</label> 
 <label><input type="radio" name="pay" value="2">계좌이체</label>
@@ -52,7 +52,7 @@
 <br>
 <div align="right">
 <button type="button" class="btn btn-outline-secondary" onclick="location='index'">쇼핑하러 가기</button>
-<button type="submit" class="btn btn-primary">구매</button>
+<button type="submit" class="btn btn-primary" onclick="return payCheck()">구매</button>
 </div>
 </form>
 <%@ include file="../footer.jsp" %>
